@@ -12,7 +12,7 @@ profiles =
 		kinks: 3
 		genders: 'woman'
 		city: 'New York, NY'
-		bio: 'Girl form small town'
+		bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu pulvinar lacus, sed elementum turpis. Etiam id eros vitae leo vehicula finibus. Donec at lorem non neque suscipit bibendum in eu eros. Morbi viverra tempus nisi quis dignissim. <br /> Curabitur velit est, pretium ut mi quis, pharetra pharetra augue. Nulla volutpat et quam non semper. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <br />Proin luctus metus at mauris sodales euismod. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras auctor vestibulum justo, nec porttitor libero dictum sed. Vestibulum non nulla quis urna feugiat ornare. <br />Vivamus sagittis elit lorem, sed egestas sem eleifend et. Integer egestas tortor lacinia molestie iaculis. '
 	pro2:
 		name: "Hale"
 		age: 30
@@ -20,7 +20,7 @@ profiles =
 		kinks: 2
 		genders: 'non-binary'
 		city: 'New York, NY'
-		bio: 'df dsfa fsafdsa'
+		bio: 'Curabitur dignissim cursus est, non fermentum nulla mattis nec. Sed mi urna, commodo non ornare in, hendrerit at leo. <br/>Aenean id aliquet justo, aliquet aliquam nunc. Maecenas et felis magna. Nulla eu augue interdum, congue nisi sit amet, sodales urna.<br/> Maecenas quis lectus placerat, fermentum neque at, volutpat eros. Maecenas mauris velit, eleifend quis libero a, facilisis sodales tortor.<br/> Quisque nisi mauris, cursus eu vestibulum ut, facilisis ac est. In efficitur, erat eu commodo finibus, turpis sem mollis sem, imperdiet commodo nibh nisi quis augue.<br/><br/>Fusce commodo odio dictum elementum facilisis. Proin fringilla ex sed dignissim pulvinar. In blandit velit in cursus consectetur.<br /> Sed porttitor rhoncus metus. Nunc convallis sed diam vitae ultricies. Phasellus vitae nulla quis nunc ultricies hendrerit in nec mauris.<br /> Nam fringilla ex a nisi imperdiet, id hendrerit leo faucibus.<br/> Vestibulum ac neque augue. Aliquam nec lorem eget neque vestibulum lacinia id non risus.<br/> Curabitur eu tempus lacus. Vestibulum hendrerit id erat eleifend aliquet. '
 	pro3:
 		name: "Evony"
 		age: 37
@@ -28,7 +28,7 @@ profiles =
 		kinks: 4
 		genders: 'agender'
 		city: 'New York, NY'
-		bio: 'dd akal wdm aoao'
+		bio: 'Nam ultrices velit nec sapien sagittis, nec laoreet massa porta.<br/> Suspendisse quis sapien vehicula, vulputate metus vitae, feugiat elit. Mauris cursus augue vulputate erat congue cursus.<br/> Morbi vel lacus blandit nibh dignissim faucibus. Nulla eget erat et purus commodo cursus.<br/><br/> Vivamus vulputate, diam eu viverra sollicitudin, turpis tellus vestibulum dui, vitae volutpat magna tellus sit amet dolor.<br/> Curabitur facilisis pretium lorem viverra aliquam. Nam nunc lacus, rutrum eget vestibulum sed, sollicitudin sed elit.<br/> Etiam facilisis lorem orci, in volutpat eros viverra ornare. Praesent at gravida purus. Donec sodales et ipsum aliquam bibendum.<br/><br/> Integer facilisis velit vitae elit pharetra, vitae facilisis leo rhoncus. Ut sit amet vulputate felis, nec vulputate augue. Nulla tincidunt dapibus quam et commodo. '
 	pro4:
 		name: "Dyson"
 		age: 28
@@ -36,7 +36,7 @@ profiles =
 		vouched: 6
 		genders: 'man'
 		city: 'New York, NY'
-		bio: 'sds woiow kaka wham'
+		bio: 'Phasellus molestie ultricies magna, eget tincidunt diam pulvinar at. Nullam mollis commodo mattis.<br/><br/> Aliquam sit amet sem mollis, ultrices odio eu, rutrum massa. Duis sit amet ligula lectus. Etiam id nulla lectus.<br/> Vestibulum quis quam lorem. Integer tortor leo, convallis convallis turpis eget, sagittis eleifend lacus. Sed imperdiet pretium ex, condimentum maximus lectus viverra a.<br/> Donec commodo sed dui ultricies ornare. Cras pellentesque orci vitae eros molestie, id porttitor sapien lacinia.<br/> Aliquam in lacus porta, maximus odio nec, feugiat ipsum. In ullamcorper tempor nisl, ut ultrices arcu posuere ac.<br/> Fusce pellentesque sem urna, at consequat ex varius quis. Pellentesque venenatis, lorem vitae sodales elementum, nisi felis sodales sem, a maximus magna ex nec enim. Nulla sit amet sodales felis, molestie iaculis dolor. '
 # profile blocks
 
 selectedProfile = null
@@ -56,8 +56,14 @@ for key,data of profiles
 			return
 		selectedProfile = this
 		viewProfile(this.name)
-		
 
+refreshProfiles = () ->
+	py = 0
+	for index, layer of scroll.content.children
+		if layer.visible
+			layer.y = py
+			py += 480
+	
 
 # view profile
 profile = new Layer
@@ -75,6 +81,7 @@ backToList = (event) ->
 	profile.animate
 		x: -750
 	filter.visible = true
+	refreshProfiles()
 
 profile.on(Events.SwipeLeft, backToList)
 
@@ -86,6 +93,15 @@ picture = new Layer
 	height: profile.height
 	parent: profile
 
+backAdvice = new Layer
+	x: 10
+	y: 10
+	z: 2
+	width: 500
+	html: 'To go back, <b>SWIPE LEFT</b>'
+	backgroundColor: 'transparent'
+	parent: profile
+
 like = new Layer
 	x: Align.right(-10)
 	y: Align.top(10)
@@ -94,7 +110,10 @@ like = new Layer
 	width: 100
 	height: 100
 	parent: profile
-like.on(Events.Tap, backToList)
+like.onTap ->
+	like.animate
+		opacity: 0.2
+	backToList()
 
 bioGlass = new Layer
 	parent: profile
@@ -169,6 +188,7 @@ viewProfile = (key) ->
 	profile.animate
 		x: 0
 	filter.visible = false
+	like.opacity = 1.0
 	po = profiles[key]
 	proName.html = po.name
 	if po.vouched > 0
