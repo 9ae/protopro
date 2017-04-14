@@ -1,5 +1,5 @@
 scroll = new ScrollComponent
-    size: 1350
+    size: Screen.height
 scroll.scrollHorizontal = false
 scroll.scrollVertical = true
 
@@ -40,17 +40,18 @@ profiles =
 # profile blocks
 
 selectedProfile = null
-
+blockHeight = Screen.width/1.5625
 py = 0
+
 for key,data of profiles
 	pro = new Layer
-		height: 480
-		width: 750
+		height: blockHeight
+		width: Screen.width
 		image: "images/"+key+".jpg"
 		parent: scroll.content
 		name: key
 		y: py
-	py += 480
+	py += blockHeight
 	pro.onTap ->
 		if selectedProfile
 			return
@@ -62,16 +63,16 @@ refreshProfiles = () ->
 	for index, layer of scroll.content.children
 		if layer.visible
 			layer.y = py
-			py += 480
+			py += blockHeight
 	
 
 # view profile
 profile = new Layer
-	x: -750
+	x: -1 * Screen.width
 	y: 0
 	z: 1
-	width: 750
-	height: 1350
+	width: Screen.width
+	height: Screen.height
 	backgroundColor: '#000'
 
 backToList = (event) ->
@@ -79,7 +80,7 @@ backToList = (event) ->
 		selectedProfile.visible = false
 		selectedProfile = null
 	profile.animate
-		x: -750
+		x: -1 * Screen.width
 	filter.visible = true
 	refreshProfiles()
 
