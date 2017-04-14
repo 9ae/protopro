@@ -38,40 +38,24 @@ profiles =
 		city: 'New York, NY'
 		bio: 'sds woiow kaka wham'
 # profile blocks
-pro1 = new Layer
-	height: 480
-	image: "images/pro1.jpg"
-	width: 750
-	parent: scroll.content
-pro1.onTap ->
-	viewProfile("pro1")
 
-pro2 = new Layer
-	height: 480
-	image: "images/pro2.jpg"
-	width: 750
-	y: 480
-	parent: scroll.content
-pro2.onTap ->
-	viewProfile("pro2")
+selectedProfile = null
 
-pro3 = new Layer
-	height: 480
-	image: "images/pro3.jpg"
-	width: 750
-	y: 960
-	parent: scroll.content
-pro3.onTap ->
-	viewProfile("pro3")
+py = 0
+for key,data of profiles
+	pro = new Layer
+		height: 480
+		width: 750
+		image: "images/"+key+".jpg"
+		parent: scroll.content
+		name: key
+		y: py
+	py += 480
+	pro.onTap ->
+		selectedProfile = this
+		viewProfile(this.name)
+		
 
-pro4 = new Layer
-	height: 480
-	image: "images/pro4.jpg"
-	width: 750
-	y: 1440
-	parent: scroll.content
-pro4.onTap ->
-	viewProfile("pro4")
 
 # view profile
 profile = new Layer
@@ -82,10 +66,15 @@ profile = new Layer
 	height: 1350
 	backgroundColor: '#000'
 
-profile.onSwipeLeft ->
+backToList = () ->
+	if selectedProfile
+		selectedProfile.visible = false
+		selectedProfile = null
 	profile.animate
 		x: 750
 	filter.visible = true
+
+profile.onSwipeLeft = backToList
 
 picture = new Layer
 	x: 0
@@ -103,6 +92,7 @@ like = new Layer
 	width: 100
 	height: 100
 	parent: profile
+like.onTap = backToList
 
 back = new Layer
 	x: Align.left(10)
@@ -112,6 +102,7 @@ back = new Layer
 	width: 100
 	height: 24
 	parent: profile
+back.onTap = backToList
 
 bioGlass = new Layer
 	parent: profile
