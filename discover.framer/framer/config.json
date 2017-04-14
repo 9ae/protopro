@@ -7,14 +7,14 @@
   "propertyPanelToggleStates" : {
     "Filters" : false
   },
-  "deviceType" : "apple-iphone-7-rose-gold",
+  "deviceType" : "apple-iphone-5s-space-gray",
   "projectId" : "BBE58737-D678-4CF6-8161-01F3CB6FCBC4",
   "deviceOrientation" : 0,
   "selectedHand" : "",
   "foldedCodeRanges" : [
     "{115, 4047}",
     "{4162, 494}",
-    "{4657, 2568}"
+    "{4657, 2605}"
   ],
   "deviceScale" : "fit"
 }

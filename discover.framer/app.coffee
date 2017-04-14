@@ -130,6 +130,7 @@ bioGlass = new Layer
 	shadowY: -6
 	shadowX: 4
 	borderRadius: 11
+
 bioGlass.onSwipeUp ->
 	bioGlass.height = Screen.height
 	bioGlass.animate
@@ -186,6 +187,8 @@ proBioLong = new Layer
 
 viewProfile = (key) ->
 	picture.image = "images/"+key+"more.jpg"
+	picture.blur = 0
+	bioGlass.y = 800
 	profile.animate
 		x: 0
 	filter.visible = false
