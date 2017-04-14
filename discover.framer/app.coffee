@@ -206,10 +206,10 @@ viewProfile = (key) ->
 
 
 filter = new Layer
-	height: 28
+	height: 50
 	image: "images/filter.png"
-	width: 33
-	x: 700
+	width: 50
+	x: Screen.width - 60
 	y: 10
 
 
