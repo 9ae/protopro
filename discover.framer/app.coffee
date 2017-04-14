@@ -52,6 +52,8 @@ for key,data of profiles
 		y: py
 	py += 480
 	pro.onTap ->
+		if selectedProfile
+			return
 		selectedProfile = this
 		viewProfile(this.name)
 		
@@ -59,22 +61,20 @@ for key,data of profiles
 
 # view profile
 profile = new Layer
-	x: 750
+	x: -750
 	y: 0
 	z: 1
 	width: 750
 	height: 1350
 	backgroundColor: '#000'
 
-backToList = () ->
+profile.onSwipeLeft ->
 	if selectedProfile
 		selectedProfile.visible = false
 		selectedProfile = null
 	profile.animate
-		x: 750
+		x: -750
 	filter.visible = true
-
-profile.onSwipeLeft = backToList
 
 picture = new Layer
 	x: 0
@@ -92,17 +92,6 @@ like = new Layer
 	width: 100
 	height: 100
 	parent: profile
-like.onTap = backToList
-
-back = new Layer
-	x: Align.left(10)
-	y: Align.top(20)
-	z: 2
-	image: 'images/back.png'
-	width: 100
-	height: 24
-	parent: profile
-back.onTap = backToList
 
 bioGlass = new Layer
 	parent: profile
@@ -117,6 +106,7 @@ bioGlass = new Layer
 	shadowSpread: 2
 	shadowY: -6
 	shadowX: 4
+	borderRadius: 11
 bioGlass.onSwipeUp ->
 	bioGlass.height = Screen.height
 	bioGlass.animate
