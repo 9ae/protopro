@@ -68,13 +68,15 @@ profile = new Layer
 	height: 1350
 	backgroundColor: '#000'
 
-profile.onSwipeLeft ->
+backToList = (event) ->
 	if selectedProfile
 		selectedProfile.visible = false
 		selectedProfile = null
 	profile.animate
 		x: -750
 	filter.visible = true
+
+profile.on(Events.SwipeLeft, backToList)
 
 picture = new Layer
 	x: 0
@@ -92,6 +94,7 @@ like = new Layer
 	width: 100
 	height: 100
 	parent: profile
+like.on(Events.Tap, backToList)
 
 bioGlass = new Layer
 	parent: profile
