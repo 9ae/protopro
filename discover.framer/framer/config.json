@@ -7,14 +7,14 @@
   "propertyPanelToggleStates" : {
     "Filters" : false
   },
-  "deviceType" : "apple-iphone-7-plus-silver",
+  "deviceType" : "apple-iphone-7-silver",
   "projectId" : "BBE58737-D678-4CF6-8161-01F3CB6FCBC4",
   "deviceOrientation" : 0,
   "selectedHand" : "",
   "foldedCodeRanges" : [
-    "{115, 4047}",
-    "{4162, 494}",
-    "{4657, 2605}"
+    "{115, 4805}",
+    "{4920, 494}",
+    "{5415, 2605}"
   ],
   "deviceScale" : "fit"
 }
