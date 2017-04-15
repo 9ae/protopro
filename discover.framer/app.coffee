@@ -205,12 +205,12 @@ viewProfile = (key) ->
 	
 
 
-filter = new Layer
-	height: 50
-	image: "images/filter.png"
-	width: 50
-	x: Screen.width - 60
-	y: 10
+# filter = new Layer
+# 	height: 50
+# 	image: "images/filter.png"
+# 	width: 50
+# 	x: Screen.width - 60
+# 	y: 10
 
 
 
