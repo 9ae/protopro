@@ -81,7 +81,7 @@ backToList = (event) ->
 		selectedProfile = null
 	profile.animate
 		x: -1 * Screen.width
-	filter.visible = true
+# 	filter.visible = true
 	refreshProfiles()
 
 profile.on(Events.SwipeLeft, backToList)
@@ -191,7 +191,7 @@ viewProfile = (key) ->
 	bioGlass.y = 800
 	profile.animate
 		x: 0
-	filter.visible = false
+# 	filter.visible = false
 	like.opacity = 1.0
 	po = profiles[key]
 	proName.html = po.name
