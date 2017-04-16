@@ -2,9 +2,11 @@
 # myModule = require "myModule"
 # Reference the contents by name, like myModule.myFunction() or myModule.myVar
 
-exports.myVar = "myVariable"
+exports.profileViewed = (kinks, vouched) ->
+	analytics.track("Profile Viewed", {kinks: kinks, vouched: vouched})
 
-exports.myFunction = ->
-	print "myFunction is running"
+exports.screenLoaded = ->
+	analytics.track("Screen Loaded")
 
-exports.myArray = [1, 2, 3]
+exports.profileAction = (name, action) ->
+	analytics.track("Profile "+action, {name: name})

@@ -1,3 +1,5 @@
+track = require "myModule"
+
 scroll = new ScrollComponent
     size: Screen.height
 scroll.scrollHorizontal = false
@@ -85,6 +87,8 @@ backToList = (event) ->
 	refreshProfiles()
 
 profile.on(Events.SwipeLeft, backToList)
+profile.onSwipeLeftEnd ->
+	track.profileAction(proName.html, "Close")
 
 picture = new Layer
 	x: 0
@@ -114,6 +118,7 @@ like = new Layer
 like.onTap ->
 	like.animate
 		opacity: 0.2
+	track.profileAction(proName.html, "Likes")
 	backToList()
 
 bioGlass = new Layer
@@ -137,10 +142,15 @@ bioGlass.onSwipeUp ->
 		y: 120
 	picture.animate
 		blur: 10
+bioGlass.onSwipeUpEnd ->
+	track.profileAction(proName.html, "Read More")
+
 bioGlass.onSwipeDown ->
 	picture.blur = 0
 	bioGlass.animate
 		y: 800
+bioGlass.onSwipeDownEnd ->
+	track.profileAction(proName.html, "Show Less")
 
 proName = new Layer
 	x: Align.left(20)
@@ -202,8 +212,11 @@ viewProfile = (key) ->
 	proExcerpt.html += ' living in <b>'+po.city+'</b><br />'
 	proExcerpt.html += 'Identifies as: <b>'+po.genders+'</b>'
 	proBioLong.html = po.bio
+	track.profileViewed(po.kinks, po.vouched)
 	
 
+
+track.screenLoaded()
 
 # filter = new Layer
 # 	height: 50
@@ -211,6 +224,3 @@ viewProfile = (key) ->
 # 	width: 50
 # 	x: Screen.width - 60
 # 	y: 10
-
-
-

@@ -12,9 +12,9 @@
   "deviceOrientation" : 0,
   "selectedHand" : "",
   "foldedCodeRanges" : [
-    "{115, 4805}",
-    "{4920, 494}",
-    "{5415, 2609}"
+    "{143, 4805}",
+    "{4948, 494}",
+    "{5443, 2915}"
   ],
   "deviceScale" : "fit"
 }
